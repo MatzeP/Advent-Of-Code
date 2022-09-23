@@ -23,33 +23,30 @@ How many strings are nice?
 #ce ----------------------------------------------------------------------------
 
 #include <array.au3>
+#include <file.au3>
 #include <Crypt.au3>
 #include <GUIConstantsEx.au3>
 #include <StringConstants.au3>
 #include <WinAPIConv.au3>
 
 
-Global $Input="bgvyzdsv";"abcdef"
-Global $Key=""
-Global $Number=1
-Global $End=False
-Global $MD5Hash
-Global $g_iAlgorithm = $CALG_MD5
+Global $Input
+_FileReadToArray("2015-Day-5.1_Input.txt",$Input)
 
-_Crypt_Startup() ; To optimize performance start the crypt library.
+Global $niceStringsCount=0
 
-Do
-	$Key=$Input&$Number
-	$MD5Hash =  _Crypt_HashData($Key, $g_iAlgorithm) ; Create a hash of the text entered.
-	;ConsoleWrite($Key & " -- " & $MD5Hash & @CRLF)
-	If (StringLeft($MD5Hash,8)="0x000000") Then
-		$End=True
-	Else
-		$Number+=1
+
+For $i=1 To $Input[0]
+	If StringRegExp($Input[$i],"[aeiou].*[aeiou].*[aeiou]")=1 Then
+		If StringRegExp($Input[$i],"(.)\1")=1 Then
+			If StringRegExp($Input[$i],"(ab|cd|pq|xy)")=0 Then
+				;MsgBox(0,"NiceString",$Input[$i])
+				$niceStringsCount+=1
+			EndIf
+		EndIf
 	EndIf
-Until $End
+Next
 
- _Crypt_Shutdown() ; Shutdown the crypt library.
-ClipPut($Number)
-MsgBox(0,"2015_Day-4.2",$Number) ;Lösung 1038736
+ClipPut($niceStringsCount)
+MsgBox(0,"2015_Day-5.1",$niceStringsCount) ;Lösung 255
 ;_ArrayDisplay($aDimension)
