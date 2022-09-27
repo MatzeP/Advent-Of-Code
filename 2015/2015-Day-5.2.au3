@@ -35,14 +35,14 @@ Global $niceStringsCount=0
 
 
 For $i=1 To $Input[0]
-	If StringRegExp($Input[$i],"[aeiou].*[aeiou].*[aeiou]")=1 Then
-		If StringRegExp($Input[$i],"(.)\1")=1 Then
-			MsgBox(0,"NiceString",$Input[$i])
+	If StringRegExp($Input[$i],"(..).*\1")=1 Then ; --> (..)=eine Gruppe aus zwei Zeichen .* = ein beliebiges Zeichen unendl. Wiederholung \1= Gruppe 1 Inhalt von der ()
+		If StringRegExp($Input[$i],"(.).\1")=1 Then ; --> (.) = Eine Gruppe aus einem beliebigen Zeichen .=ein beliebiges Zeichen \1 Gruppe 1 Inhalt der ()
+;~ 			MsgBox(0,"NiceString",$Input[$i])
 			$niceStringsCount+=1
 		EndIf
 	EndIf
 Next
 
 ClipPut($niceStringsCount)
-MsgBox(0,"2015_Day-5.2",$niceStringsCount) ;Lösung 255
+MsgBox(0,"2015_Day-5.2",$niceStringsCount) ;Lösung 55
 ;_ArrayDisplay($aDimension)

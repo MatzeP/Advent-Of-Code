@@ -37,9 +37,9 @@ Global $niceStringsCount=0
 
 
 For $i=1 To $Input[0]
-	If StringRegExp($Input[$i],"[aeiou].*[aeiou].*[aeiou]")=1 Then
-		If StringRegExp($Input[$i],"(.)\1")=1 Then
-			If StringRegExp($Input[$i],"(ab|cd|pq|xy)")=0 Then
+	If StringRegExp($Input[$i],"[aeiou].*[aeiou].*[aeiou]")=1 Then		; --> ([aeiou].*[aeiou].*[aeiou]" = Drei Vokale in dem String
+		If StringRegExp($Input[$i],"(.)\1")=1 Then						; --> (.)=eine Gruppe aus zwei Zeichen \1= Gruppe 1 Inhalt von der ()  entspricht doppelte Zeichen
+			If StringRegExp($Input[$i],"(ab|cd|pq|xy)")=0 Then			; --> (ab|cd|pq|xy) = diese vier Buchstabenfolgen mit einem |-oder getrennt
 				;MsgBox(0,"NiceString",$Input[$i])
 				$niceStringsCount+=1
 			EndIf
