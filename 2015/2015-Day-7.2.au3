@@ -181,7 +181,7 @@ Do
 		EndIf
 	Next
 	$Input[0]=UBound($Input)-1
-;~ 	ToolTip($aWireArray[0][0]&"/"&$Input[0])
+	ToolTip($aWireArray[0][0]&"/"&$Input[0])
 ;~ 	_ArrayDisplay($Input)
 ;~ 	_ArrayDisplay($aWireArray)
 Until $Input[0]=1
@@ -189,4 +189,4 @@ _ArrayDisplay($Input)
 _ArraySort($aWireArray)
 _ArrayDisplay($aWireArray)
 ;~ ClipPut($LightBrightness)
-MsgBox(0,"2015_Day-7.1","") ;Lösung 956
+MsgBox(0,"2015_Day-7.1","") ;Lösung 40149
