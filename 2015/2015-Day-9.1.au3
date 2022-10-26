@@ -35,10 +35,21 @@ What is the distance of the shortest route?
 #include <WinAPIConv.au3>
 
 
-Global $Input
-_FileReadToArray("2015-Day-9.1_Input.txt",$Input)
+Global $Input, $inputDataArray, $Cities[1]
+_FileReadToArray("2015-Day-9.1_Input_Bsp.txt",$Input)
 
-_ArrayDisplay($Input)
+For $i=1 To $Input[0]
+	$inputDataArray=StringRegExp($Input[$i],'(\w*)\sto\s(\w*)\s=\s(\d*)',3)
+	_ArrayDisplay($inputDataArray)
+	For $j=0 to 1
+		$res=_ArrayFindAll($Cities,$inputDataArray[$j])
+		If @error <> 0 Then
+			_ArrayAdd($Cities,$inputDataArray[$j],1)
+			$Cities[0]=UBound($Cities)-1
+		EndIf
+	Next
+Next
+_ArrayDisplay($Cities)
 
 ;~ _ArrayDisplay($Input)
 
@@ -51,4 +62,4 @@ Next
 
 MsgBox(0,"2015_Day-9.1"," ") ;Lösung
 ;~ ;FALSCH:
-ClipPut()
+ClipPut("")
