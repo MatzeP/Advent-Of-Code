@@ -38,7 +38,7 @@ Your puzzle input is cqjxjnds.
 Global $Input
 $Input="cqjxjnds"
 Global $letters=_ArrayFromString("a,b,c,d,e,f,g,h,k,m,n,o,p,q,r,s,t,u,v,w,x,y,z",",")
-_ArrayDisplay($letters)
+;~ _ArrayDisplay($letters)
 Global $InputSplit=""
 Global $Previous=""
 Global $result=""
@@ -57,30 +57,59 @@ Global $StartPos=1000000
 	If (($lPos > 0) And ($lPos < $StartPos)) Then
 			$StartPos=$lPos
 	EndIf
-	MsgBox(0,"StartPos",$StartPos & @CRLF & StringLen($Input))
-
-	Exit
-	$InputSplit=StringSplit($Input,"")
-	$Previous=""
-	$Count=""
-	$result=""
+;~ 	MsgBox(0,"StartPos",$StartPos & @CRLF & StringLen($Input))
+	$StartCrypt=StringLeft($Input,$StartPos-1)&NextLetter(StringMid($Input,$StartPos,1))&FillWithLetter("a",StringLen($Input)-$StartPos)
+;~ 	MsgBox(0,"",StringLeft($Input,$StartPos-1)&@CRLF&NextLetter(StringMid($Input,$StartPos,1))&@CRLF&FillWithLetter("a",StringLen($Input)-$StartPos)&@CRLF&$StartCrypt)
+;~ 	Exit
 ;~ 	ConsoleWrite("0 - $InputSplit[$i]: " & $InputSplit[0] & @CRLF)
-	For $i=1 To $InputSplit[0]
-;~ 		ConsoleWrite("1 - Input: " & $Input & " Count: " & $Count & " Result: " & $result & @CRLF)
-		If (Number($InputSplit[$i])==Number($Previous)) Then
-			$Count+=1
-;~ 			ConsoleWrite("2 - Input: " & $Input & " Count: " & $Count & " Result: " & $result & @CRLF)
-		Else
-			$result=$result&$Count&$Previous
-			$Count=1
-			$Previous=$InputSplit[$i]
-;~ 			ConsoleWrite("3- Input: " & $Input & " Count: " & $Count & " Result: " & $result & @CRLF)
-		EndIf
-;~ ConsoleWrite($a & " -- " & $i & "/" & $InputSplit[0] & @CRLF)
-	Next
+;~ 	For $i=1 To $InputSplit[0]
+Local $lastLetter=1
+Local $test=StringSplit($StartCrypt,"")
+		While $lastLetter <> $letters[0]
+			$StartCrypt=NextLetter(StringRight($StartCrypt,1))
+			$lastLetter+=1
+			ConsoleWrite($lastLetter & " -- " & $StartCrypt & @CRLF)
+		WEnd
+		_ArrayToString(
+		Exit
+;~ 	Next
 	$result=$result&$Count&$Previous
 
 
 MsgBox(0,"2015_Day-11.1","Result: (" & $result&") ") ;Lösung
 ;~ ;FALSCH:
 ClipPut($result)
+
+Func NextLetter($letterToInc)
+;~ 	MsgBox(0,"Start",$letterToInc)
+	Local $res=""
+	Local $letterPos=""
+	If (($letterToInc="i") Or ($letterToInc="j") Or ($letterToInc="l")) Then
+		Switch $letterToInc
+			Case "i", "j"
+				$res=8
+			Case "l"
+				$res=9
+		EndSwitch
+	Else
+		$letterPos=_ArrayFindAll($letters,$letterToInc,0)
+;~ 		MsgBox(0,"Pos-"&UBound($letters),$letterPos[0])
+		If $letterPos[0]=UBound($letters) Then
+			$res=$letters[0]
+;~ 			MsgBox(0,"a",$res)
+		Else
+			$res=$letterPos[0]+1
+;~ 			MsgBox(0,"b",$res)
+		EndIf
+	EndIf
+;~ 	MsgBox(0,"Return",$letters[$res])
+	Return $letters[$res]
+EndFunc
+
+Func FillWithLetter($letterToFill,$length)
+	Local $res=""
+	For $i=1 To $length
+		$res=$res&$letterToFill
+	Next
+	Return $res
+EndFunc
