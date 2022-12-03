@@ -73,5 +73,5 @@ For $i=1 To $Input[0]
 	EndSwitch
 Next
 
+MsgBox(0,"Day-2_StarTwo",$Komibination) ;12767
 ClipPut($Komibination)
-MsgBox(0,"Day-1_StarTwo",$Komibination) ;12767

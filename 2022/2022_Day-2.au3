@@ -61,6 +61,5 @@ For $i=1 To $Input[0]
 	EndSwitch
 Next
 
-MsgBox(0,"Day-1_StarOne",$Komibination)  ;11666
+MsgBox(0,"Day-2_StarOne",$Komibination)  ;11666
 ClipPut($Komibination)
-;~ MsgBox(0,"Day-1_StarTwo",$result) ;1797

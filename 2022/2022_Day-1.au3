@@ -56,12 +56,10 @@ For $i=1 To $Input[0]
 	Else
 		$Elfcounter+=1
 		_ArrayAdd($NewArray,$Kalorien)
-;~ 		_ArrayAdd($NewArray,"Elf_"&$Elfcounter & " - " & $Kalorien)
 		$Kalorien=0
 	EndIf
 Next
 _ArraySort($NewArray,1)
-;~ _ArrayDisplay($NewArray)
+
 MsgBox(0,"Day-1_StarOne",$NewArray[0])  ;68923
 ClipPut($NewArray[0])
-;~ MsgBox(0,"Day-1_StarTwo",$result) ;1797
