@@ -86,5 +86,5 @@ For $i=1 To $Input[0]
 	EndIf
 Next
 
-MsgBox(0,"Day-1_StarTwo",$Summe) ;933
+MsgBox(0,"Day-4_StarTwo",$Summe) ;933
 ClipPut($Summe)

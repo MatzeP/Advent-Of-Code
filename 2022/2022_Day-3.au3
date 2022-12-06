@@ -63,4 +63,3 @@ Next
 
 MsgBox(0,"Day-3_StarOne",$Summe)  ;7701
 ClipPut($Summe)
-;~ MsgBox(0,"Day-1_StarTwo",$result) ;1797
